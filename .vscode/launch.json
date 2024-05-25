@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "clean_arch_bookly_app-b01776a74d33fdf47f56116df7b6d0fd46ebd5ca",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "clean_arch_bookly_app-b01776a74d33fdf47f56116df7b6d0fd46ebd5ca (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "clean_arch_bookly_app-b01776a74d33fdf47f56116df7b6d0fd46ebd5ca (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
