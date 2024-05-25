@@ -4,27 +4,29 @@ import 'panelization_summary.dart';
 import 'reading_modes.dart';
 
 class VolumeInfo {
-  final String? title;
-  final List<String>? authors;
-  final String? publisher;
-  final String? publishedDate;
-  final String? description;
-  final List<IndustryIdentifier>? industryIdentifiers;
-  final ReadingModes? readingModes;
-  final int? pageCount;
-  final String? printType;
-  final List<String>? categories;
-  final String? maturityRating;
-  final bool? allowAnonLogging;
-  final String? contentVersion;
-  final PanelizationSummary? panelizationSummary;
-  final ImageLinks imageLinks;
-  final String? language;
-  final String? previewLink;
-  final String? infoLink;
-  final String? canonicalVolumeLink;
+  String? title;
+  List<String>? authors;
+  String? publisher;
+  String? publishedDate;
+  String? description;
+  List<IndustryIdentifier>? industryIdentifiers;
+  ReadingModes? readingModes;
+  int? pageCount;
+  String? printType;
+  List<String>? categories;
+  num? averageRating;
+  num? ratingsCount;
+  String? maturityRating;
+  bool? allowAnonLogging;
+  String? contentVersion;
+  PanelizationSummary? panelizationSummary;
+  ImageLinks? imageLinks;
+  String? language;
+  String? previewLink;
+  String? infoLink;
+  String? canonicalVolumeLink;
 
-  const VolumeInfo({
+  VolumeInfo({
     this.title,
     this.authors,
     this.publisher,
@@ -35,11 +37,13 @@ class VolumeInfo {
     this.pageCount,
     this.printType,
     this.categories,
+    this.averageRating,
+    this.ratingsCount,
     this.maturityRating,
     this.allowAnonLogging,
     this.contentVersion,
     this.panelizationSummary,
-    required this.imageLinks,
+    this.imageLinks,
     this.language,
     this.previewLink,
     this.infoLink,
@@ -48,7 +52,9 @@ class VolumeInfo {
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) => VolumeInfo(
         title: json['title'] as String?,
-        authors: (json['authors'] as List<dynamic>?)?.cast<String>(),
+        authors: (json['authors'] as List<dynamic>?)
+            ?.map((author) => author.toString())
+            .toList(),
         publisher: json['publisher'] as String?,
         publishedDate: json['publishedDate'] as String?,
         description: json['description'] as String?,
@@ -61,7 +67,11 @@ class VolumeInfo {
                 json['readingModes'] as Map<String, dynamic>),
         pageCount: json['pageCount'] as int?,
         printType: json['printType'] as String?,
-        categories: (json['categories'] as List<dynamic>?)?.cast<String>(),
+        categories: (json['categories'] as List<dynamic>?)
+            ?.map((category) => category.toString())
+            .toList(),
+        averageRating: json['averageRating'] as num?,
+        ratingsCount: json['ratingsCount'] as num?,
         maturityRating: json['maturityRating'] as String?,
         allowAnonLogging: json['allowAnonLogging'] as bool?,
         contentVersion: json['contentVersion'] as String?,
@@ -69,8 +79,9 @@ class VolumeInfo {
             ? null
             : PanelizationSummary.fromJson(
                 json['panelizationSummary'] as Map<String, dynamic>),
-        imageLinks:
-            ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>),
+        imageLinks: json['imageLinks'] == null
+            ? null
+            : ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>),
         language: json['language'] as String?,
         previewLink: json['previewLink'] as String?,
         infoLink: json['infoLink'] as String?,
@@ -89,11 +100,13 @@ class VolumeInfo {
         'pageCount': pageCount,
         'printType': printType,
         'categories': categories,
+        'averageRating': averageRating,
+        'ratingsCount': ratingsCount,
         'maturityRating': maturityRating,
         'allowAnonLogging': allowAnonLogging,
         'contentVersion': contentVersion,
         'panelizationSummary': panelizationSummary?.toJson(),
-        'imageLinks': imageLinks.toJson(),
+        'imageLinks': imageLinks?.toJson(),
         'language': language,
         'previewLink': previewLink,
         'infoLink': infoLink,
