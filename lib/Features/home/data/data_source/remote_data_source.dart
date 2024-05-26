@@ -20,7 +20,7 @@ class HomeRemoteDataSourceImplem extends RemoteDataSource {
     var data = await apiService.get(
         endPoint: 'volumes?Filtering=free-ebooks&q=programming');
     List<BookEntity> books = getBooksList(data);
-
+    saveBooksData(books, kFeatureBox);
     return books;
   }
 
@@ -29,8 +29,7 @@ class HomeRemoteDataSourceImplem extends RemoteDataSource {
     var data = await apiService.get(
         endPoint: 'volumes?Filtering=free-ebooks&Sorting=newest&q=programming');
     List<BookEntity> books = getBooksList(data);
-    saveBooksData(books, kFeatureBox);
-
+    saveBooksData(books, kNewestBox);
     return books;
   }
 
