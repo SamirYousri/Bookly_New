@@ -3,14 +3,13 @@ import 'package:bookly/Features/home/domain/entities/book_entity.dart';
 import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/api_service.dart';
 import 'package:bookly/core/utils/functions/save_box_data.dart';
-import 'package:hive/hive.dart';
 
-abstract class RemoteDataSource {
+abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks();
   Future<List<BookEntity>> fetchNewestBooks();
 }
 
-class HomeRemoteDataSourceImplem extends RemoteDataSource {
+class HomeRemoteDataSourceImplem extends HomeRemoteDataSource {
   final ApiService apiService;
 
   HomeRemoteDataSourceImplem(this.apiService);
