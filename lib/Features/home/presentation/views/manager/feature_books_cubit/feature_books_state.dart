@@ -6,6 +6,8 @@ class FeatureBooksInitial extends FeatureBooksState {}
 
 class FeatureBooksLoading extends FeatureBooksState {}
 
+class FeatureBooksLoadingPagenition extends FeatureBooksState {}
+
 class FeatureBooksFailure extends FeatureBooksState {
   final String messError;
   FeatureBooksFailure({required this.messError});
