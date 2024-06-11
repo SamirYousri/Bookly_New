@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
-import 'book_rating.dart';
+
 import 'books_action.dart';
 import 'custom_book_item.dart';
 

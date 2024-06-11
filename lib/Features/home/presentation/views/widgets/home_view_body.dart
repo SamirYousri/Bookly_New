@@ -1,4 +1,3 @@
-import 'package:bookly/Features/home/presentation/manager/feature_books_cubit/feature_books_cubit.dart';
 import 'package:bookly/Features/home/presentation/manager/newest_books_cubit/newest_books_cubit.dart';
 import 'package:bookly/Features/home/presentation/views/widgets/BestSellerListViewBlocConcumer.dart';
 import 'package:bookly/Features/home/presentation/views/widgets/FeaturedBooksListViewBlocConsumer.dart';
