@@ -2,13 +2,9 @@ import 'package:dio/dio.dart';
 
 abstract class Failure {
   final String messError;
-
-  Failure({required this.messError});
-}
-
+  Failure({required this.messError});}
 class ServerFailure extends Failure {
   ServerFailure({required super.messError});
-
   factory ServerFailure.fromDioError(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
