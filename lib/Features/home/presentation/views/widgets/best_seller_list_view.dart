@@ -23,6 +23,18 @@ class _BestSellerListViewState extends State<BestSellerListView> {
     super.initState();
   }
 
+  void scrollListener() async {
+    if (scrollController.position.pixels >=
+        0.7 * scrollController.position.maxScrollExtent) {
+      if (!isLoding) {
+        isLoding = true;
+        await BlocProvider.of<NewestBooksCubit>(context)
+            .newestBooks(pageNumber: nextPage++);
+        isLoding = false;
+      }
+    }
+  }
+
   @override
   void dispose() {
     scrollController.dispose();
@@ -34,6 +46,7 @@ class _BestSellerListViewState extends State<BestSellerListView> {
     return ListView.builder(
       controller: scrollController,
       physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       padding: EdgeInsets.zero,
       itemCount: widget.books.length,
       itemBuilder: (context, index) {
@@ -42,18 +55,9 @@ class _BestSellerListViewState extends State<BestSellerListView> {
           child: BookListViewItem(books: widget.books[index]),
         );
       },
+      // separatorBuilder: (context, index) => const SizedBox(
+      //   height: 10,
+      // ),
     );
-  }
-
-  void scrollListener() async {
-    if (scrollController.position.pixels >=
-        0.7 * scrollController.position.maxScrollExtent) {
-      if (!isLoding) {
-        isLoding = true;
-        await BlocProvider.of<NewestBooksCubit>(context)
-            .newestBooks(pageNumber: nextPage++);
-        isLoding = false;
-      }
-    }
   }
 }

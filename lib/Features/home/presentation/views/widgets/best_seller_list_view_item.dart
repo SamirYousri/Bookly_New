@@ -27,6 +27,8 @@ class BookListViewItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: CachedNetworkImage(
                   imageUrl: books.image!,
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.broken_image),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -53,7 +55,8 @@ class BookListViewItem extends StatelessWidget {
                     height: 3,
                   ),
                   Text(
-                    books.authorName!,
+                    overflow: TextOverflow.ellipsis,
+                    books.authorName ?? 'Un Known',
                     style: Styles.textStyle14,
                   ),
                   const SizedBox(
@@ -68,7 +71,9 @@ class BookListViewItem extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      const BookRating(),
+                      BookRating(
+                        books: books,
+                      ),
                     ],
                   ),
                 ],

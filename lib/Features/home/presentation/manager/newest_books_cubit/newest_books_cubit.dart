@@ -18,7 +18,7 @@ class NewestBooksCubit extends Cubit<NewestBooksState> {
       emit(NewestBooksLoadingPagenition());
     }
 
-    var result = await newestBooksUseCase.call();
+    var result = await newestBooksUseCase.call(pageNumber);
     result.fold((failure) {
       emit(NewestBooksFailure(messError: failure.messError));
     }, (books) {
