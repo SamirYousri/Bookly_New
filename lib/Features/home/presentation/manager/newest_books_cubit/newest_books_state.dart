@@ -6,6 +6,8 @@ class NewestBooksInitial extends NewestBooksState {}
 
 class NewestBooksLoading extends NewestBooksState {}
 
+class NewestBooksLoadingPagenition extends NewestBooksState {}
+
 class NewestBooksFailure extends NewestBooksState {
   final String messError;
 
