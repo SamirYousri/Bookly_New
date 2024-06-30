@@ -7,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'custom_app_bar.dart';
 
 class HomeViewBody extends StatefulWidget {
-  const HomeViewBody({super.key});
+  const HomeViewBody({
+    super.key,
+  });
 
   @override
   State<HomeViewBody> createState() => _HomeViewBodyState();

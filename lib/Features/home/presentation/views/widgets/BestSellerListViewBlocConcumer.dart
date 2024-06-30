@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BestSellerListViewBlocConsumer extends StatefulWidget {
-  const BestSellerListViewBlocConsumer({super.key});
+  const BestSellerListViewBlocConsumer({
+    super.key,
+  });
 
   @override
   State<BestSellerListViewBlocConsumer> createState() =>
