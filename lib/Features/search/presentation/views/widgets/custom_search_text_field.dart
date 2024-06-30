@@ -1,26 +1,47 @@
+import 'package:bookly/Features/search/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomSearchTextField extends StatelessWidget {
   const CustomSearchTextField({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        enabledBorder: buildOutlineInputBorder(),
-        focusedBorder: buildOutlineInputBorder(),
-        hintText: 'Search',
-        suffixIcon: IconButton(
-          onPressed: () {},
-          icon: const Opacity(
-            opacity: .8,
-            child: Icon(
-              FontAwesomeIcons.magnifyingGlass,
-              size: 22,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
+      child: TextField(
+        onChanged: (String value) {
+          BlocProvider.of<SearchCubit>(context).fetchWord(searchWord: value);
+        },
+        onSubmitted: (String value) {
+          BlocProvider.of<SearchCubit>(context).fetchSearchBooks();
+        },
+        decoration: InputDecoration(
+            hintText: 'Type here ...',
+            hintStyle: const TextStyle(color: Colors.grey),
+            border: buildOutlineInputBorder(),
+            enabledBorder: buildOutlineInputBorder(),
+            focusedBorder: buildOutlineInputBorder(),
+            suffixIcon: IconButton(
+              onPressed: () {
+                BlocProvider.of<SearchCubit>(context).fetchSearchBooks();
+              },
+              icon: const FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ),
+            prefixIcon: IconButton(
+              onPressed: () {
+                GoRouter.of(context).pop();
+              },
+              icon: const FaIcon(
+                FontAwesomeIcons.arrowLeft,
+                color: Colors.white,
+              ),
+            )),
       ),
     );
   }
@@ -30,9 +51,7 @@ class CustomSearchTextField extends StatelessWidget {
       borderSide: const BorderSide(
         color: Colors.white,
       ),
-      borderRadius: BorderRadius.circular(
-        12,
-      ),
+      borderRadius: BorderRadius.circular(16),
     );
   }
 }

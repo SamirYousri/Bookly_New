@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bookly/Features/home/presentation/views/widgets/best_seller_list_view_item.dart';
+import 'package:bookly/Features/search/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'custom_search_text_field.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -8,44 +9,50 @@ class SearchViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomSearchTextField(),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            'Search Result',
-            style: Styles.textStyle18,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Expanded(
-            child: SearchResultListView(),
-          ),
-        ],
-      ),
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomSearchTextField(),
+        SizedBox(
+          height: 20,
+        ),
+        SearchListItems()
+      ],
     );
   }
 }
 
-class SearchResultListView extends StatelessWidget {
-  const SearchResultListView({super.key});
+class SearchListItems extends StatelessWidget {
+  const SearchListItems({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return const Padding(
-            padding: EdgeInsets.symmetric(vertical: 10), child: Text('date')
-            //BookListViewItem(),
-            );
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        if (state is SuccessSearchState) {
+          return Expanded(
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return BookListViewItem(books: state.books[index]);
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 10,
+                );
+              },
+              itemCount: state.books.length,
+            ),
+          );
+        } else if (state is FailureSearchState) {
+          return Center(child: Text(state.errMessage));
+        } else if (state is InitialSearchState ||
+            state is InitialAfterSearchState) {
+          return const Center(child: Text('search for programming books'));
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
