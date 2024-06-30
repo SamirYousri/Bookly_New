@@ -34,7 +34,10 @@ class SearchListItems extends StatelessWidget {
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return BookListViewItem(books: state.books[index]);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: BookListViewItem(books: state.books[index]),
+                );
               },
               separatorBuilder: (context, index) {
                 return const SizedBox(
